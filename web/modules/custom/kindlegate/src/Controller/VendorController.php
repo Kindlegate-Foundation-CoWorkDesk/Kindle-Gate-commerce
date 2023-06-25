@@ -1,5 +1,4 @@
 <?php
-
 namespace Drupal\kindlegate\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

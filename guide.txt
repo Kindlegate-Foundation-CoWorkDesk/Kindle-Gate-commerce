@@ -1,0 +1,9 @@
+Drush:
+    Drush is a command-line tool for managing Drupal installations. If you have Drush installed, open a terminal or command prompt.
+    composer global require drush/drush
+
+    It may require drupal/core globally. So you install it via the command below
+    composer global require drupal/core --prefer-dist --optimize-autoloader
+
+
+Drupal Console - Not Installed

@@ -104,7 +104,7 @@ kindlegate.update_vendor_product:
 
 # Delete Vendor's Product
 kindlegate.delete_vendor_product:
-  path: '/api/vendor/{vendor_id}/products/{product_id}/delete'
+  path: 'http://localhost/kindlegate/web/api/vendor/{vendor_id}/products/{product_id}/delete'
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorProductController::deleteVendorProduct'
     _format: json
