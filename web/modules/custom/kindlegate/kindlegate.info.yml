@@ -1,0 +1,14 @@
+# name: 'Kindle Gate'
+# type: module
+# core_version_requirement: ^8 || ^9
+# package: Custom
+# dependencies:
+#   - commerce:commerce
+
+name: 'Kindle Gate'
+type: module
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - serialization
+  - rest

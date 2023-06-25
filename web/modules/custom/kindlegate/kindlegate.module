@@ -1,0 +1,12 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function my_module_menu_local_tasks_alter(&$data, RouteMatchInterface $route_match) {
+  // Modify menu local tasks as needed.
+}
+
+// Implement other custom functionality as required.
