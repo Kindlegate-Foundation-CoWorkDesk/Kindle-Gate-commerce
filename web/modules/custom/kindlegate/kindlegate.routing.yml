@@ -56,7 +56,7 @@ kindlegate.get_vendors:
 kindlegate.products:
   path: '/api/products'
   defaults:
-    _controller: '\Drupal\my_api\Controller\MyApiController::getProducts'
+    _controller: '\Drupal\kindlegate\Controller\ProductController::getProducts'
     _format: json
   requirements:
     _access: 'TRUE'
@@ -65,7 +65,7 @@ kindlegate.products:
 kindlegate.add_product:
   path: '/api/products/add'
   defaults:
-    _controller: '\Drupal\my_api\Controller\MyApiController::addProduct'
+    _controller: '\Drupal\kindlegate\Controller\ProductController::addProduct'
     _format: json
   requirements:
     _access: 'TRUE'
@@ -74,7 +74,7 @@ kindlegate.add_product:
 kindlegate.products_by_vendor:
   path: '/api/products/{vendor_id}'
   defaults:
-    _controller: '\Drupal\my_api\Controller\MyApiController::getProductsByVendor'
+    _controller: '\Drupal\kindlegate\Controller\VendorProductController::getProductsByVendor'
     _format: json
   requirements:
     _access: 'TRUE'
@@ -96,7 +96,7 @@ kindlegate.add_vendor_product:
 kindlegate.update_vendor_product:
   path: '/api/vendor/{vendor_id}/products/{product_id}/update'
   defaults:
-    _controller: '\Drupal\kindlegate\Controller\MyApiController::updateVendorProduct'
+    _controller: '\Drupal\kindlegate\Controller\VendorProductController::updateVendorProduct'
     _format: json
   methods: [PATCH]
   requirements:
@@ -106,7 +106,7 @@ kindlegate.update_vendor_product:
 kindlegate.delete_vendor_product:
   path: '/api/vendor/{vendor_id}/products/{product_id}/delete'
   defaults:
-    _controller: '\Drupal\kindlegate\Controller\MyApiController::deleteVendorProduct'
+    _controller: '\Drupal\kindlegate\Controller\VendorProductController::deleteVendorProduct'
     _format: json
   methods: [DELETE]
   requirements:
@@ -116,7 +116,7 @@ kindlegate.delete_vendor_product:
 kindlegate.get_vendor_product:
   path: '/api/vendor/{vendor_id}/products/{product_id}'
   defaults:
-    _controller: '\Drupal\kindlegate\Controller\MyApiController::getVendorProduct'
+    _controller: '\Drupal\kindlegate\Controller\VendorProductController::getVendorProduct'
     _format: json
   methods: [GET]
   requirements:
