@@ -47,7 +47,7 @@ kindlegate.get_vendors:
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorController::getVendors'
     _format: json
-  methods: [GET]
+  # methods: [GET]
   requirements:
     _access: 'TRUE'
 
