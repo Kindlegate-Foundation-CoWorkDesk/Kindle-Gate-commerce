@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: custom_vendor_type
+label: 'Custom Vendor Type'
+description: 'A custom vendor type for Drupal Commerce.'
+class: Drupal\commerce_store\Entity\StoreType
+field_ui_base_route: entity.commerce_store_type.edit_form

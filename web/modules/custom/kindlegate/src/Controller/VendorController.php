@@ -1,17 +1,21 @@
 <?php
 namespace Drupal\kindlegate\Controller;
 
+use Drupal\commerce_store\Entity\Store;
 use Drupal\Core\Controller\ControllerBase;
+
 use Drupal\user\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 /**
  * Provides an API endpoint to register a vendor.
  */
 class VendorController extends ControllerBase
 {
+  protected $entityTypeManager;
 
   /**
    * {@inheritdoc}
@@ -35,25 +39,37 @@ class VendorController extends ControllerBase
     // Retrieve the necessary request data.
     $data = $request->request->all();
 
-    // Create a new user entity as the vendor.
-    $user = User::create();
-    $user->enforceIsNew();
-    $user->setUsername($data['username']);
-    $user->setEmail($data['email']);
-    // Set other relevant user fields.
-    $user->activate();
-    $user->save();
+    // // Create a new user entity as the vendor.
+    // $user = User::create();
+    // $user->enforceIsNew();
+    // $user->setUsername($data['username']);
+    // $user->setEmail($data['email']);
+    // // Set other relevant user fields.
+    // $user->activate();
+    // $user->save();
 
-    // Add the vendor role.
-    $user->addRole('vendor');
-    $user->save();
+    // // Add the vendor role.
+    // $user->addRole('vendor');
+    // $user->save();
+
+    $store = Store::create([
+      'type' => 'online', // Replace with the appropriate vendor type machine name.
+      'name' => $data['username'],
+      'custom_field' => 'f',
+    ]);
+    
+    $store->save();
+  
+    // return $store;
 
     // Add any additional vendor-related configuration or setup as needed.
 
     // Prepare the response.
     $response = [
       'message' => 'Vendor registered successfully.',
-      'user_id' => $user->id(),
+      // 'user_id' => $user->id(),
+      // 'store_id' => $store->id(),
+      'data' => $store
     ];
 
     return new JsonResponse($response);
@@ -100,24 +116,38 @@ class VendorController extends ControllerBase
   }
 
 
-  public function getVendors()
+  public function getVendors(EntityTypeManagerInterface $entityTypeManager)
   {
-    $query = \Drupal::entityQuery('user')
-      ->condition('status', 1)
-      ->condition('roles', 'vendor');
+    // $query = \Drupal::entityQuery('user')
+    //   ->accessCheck(TRUE)
+    //   ->condition('status', 1)
+    //   ->condition('roles', 'vendor');
 
-    $vendor_ids = $query->execute();
-    $vendors = User::loadMultiple($vendor_ids);
+    // $vendor_ids = $query->execute();
+    // $vendors = User::loadMultiple($vendor_ids);
 
-    $response = [];
+    // $response = [];
 
-    foreach ($vendors as $vendor) {
-      $response[] = [
-        'vendor_id' => $vendor->id(),
-        'name' => $vendor->getDisplayName(),
-        // Include other relevant vendor data in the response.
-      ];
+    // foreach ($vendors as $vendor) {
+    //   $response[] = [
+    //     'vendor_id' => $vendor->id(),
+    //     'name' => $vendor->getDisplayName(),
+    //     // Include other relevant vendor data in the response.
+    //   ];
+    // }
+
+    $storeStorage = $entityTypeManager->getStorage('commerce_store');
+  $storeIds = $storeStorage->getQuery()->execute();
+
+  $stores = [];
+  foreach ($storeIds as $storeId) {
+    $store = $storeStorage->load($storeId);
+    if ($store instanceof Store) {
+      $stores[] = $store;
     }
+  }
+
+  return $stores;
 
     return new JsonResponse($response);
   }

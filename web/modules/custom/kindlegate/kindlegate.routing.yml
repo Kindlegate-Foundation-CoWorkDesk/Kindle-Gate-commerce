@@ -1,11 +1,13 @@
 kindlegate.getData:
-  path: '/api/data'
+  path: '/api/datas'
   defaults:
-    # _controller: '\Drupal\my_api\Controller\MyApiController::getData'
     _controller: '\Drupal\kindlegate\Controller\ApiController::getData'
+    _title: 'Custom API - Get Data'
     _format: json
   requirements:
     _access: 'TRUE'
+  options:
+    _maintenance_access: TRUE
 
 # Vendors
 

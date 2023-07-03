@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Provides an API endpoint.
  */
-class MyApiController extends ControllerBase {
+class ApiController extends ControllerBase {
 
   /**
    * Returns JSON response.

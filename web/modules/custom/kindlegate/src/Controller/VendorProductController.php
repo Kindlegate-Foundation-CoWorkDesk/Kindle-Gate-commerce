@@ -31,7 +31,7 @@ class VendorProductController extends ControllerBase {
  * @return \Symfony\Component\HttpFoundation\JsonResponse
  *   The JSON response.
  */
-public function addVendorProduct(Request $request, $vendor_id) {
+  public function addVendorProduct(Request $request, $vendor_id) {
     // Load the vendor entity.
     $vendor = User::load($vendor_id);
     
@@ -132,6 +132,14 @@ public function addVendorProduct(Request $request, $vendor_id) {
     return new JsonResponse($response);
   }
   
+  public function getProductsByVendor(){
+
+  }
+
+
+  public function getVendorProduct(){
+    
+  }
 
 
 }

@@ -1,6 +1,10 @@
 <?php
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\ContentEntityTypeInterface;
+use Drupal\Core\Entity\Sql\SqlEntityStorageInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
  * Implements hook_menu_local_tasks_alter().
@@ -10,3 +14,59 @@ function my_module_menu_local_tasks_alter(&$data, RouteMatchInterface $route_mat
 }
 
 // Implement other custom functionality as required.
+
+
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function custom_commerce_store_entity_type_build(array &$entity_types) {
+  // Define the vendor entity type.
+  $entity_types['commerce_store'] = [
+    'base_table' => 'commerce_store',
+    'label' => t('Vendor'),
+    'entity_keys' => [
+      'id' => 'store_id',
+      'uuid' => 'uuid',
+    ],
+    'handlers' => [
+      'storage_schema' => 'Drupal\custom_commerce_store\StoreSchema',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function custom_commerce_store_entity_base_field_info_alter(array &$fields, EntityTypeInterface $entity_type) {
+  // Add custom fields to the vendor entity type.
+  if ($entity_type->id() === 'commerce_store') {
+    $fields['custom_field'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Custom Field'))
+      ->setDescription(t('A custom field for the vendor entity.'))
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'string',
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => 0,
+      ]);
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function custom_commerce_store_entity_bundle_info_alter(array &$bundles) {
+  // Add custom bundle settings to the vendor entity type.
+  if (isset($bundles['commerce_store'])) {
+    $bundles['commerce_store']['custom_bundle_setting'] = [
+      'label' => t('Custom Bundle Setting'),
+      'description' => t('A custom setting for the vendor entity bundle.'),
+      'default' => '',
+    ];
+  }
+}
+
