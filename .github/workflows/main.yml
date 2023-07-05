@@ -18,5 +18,5 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.kindlegatefoundation.org
-          username: Daniel_danielftp@store.kindlegatefoundation.org
+          username: Daniel_danielftp
           password: OiB-7N*45PvgcBht
