@@ -17,6 +17,6 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.kindlegatefoundation.org
-          username: Daniel_danielftp
-          password: OiB-7N*45PvgcBht
+          server: ${{ secrets.KINDLEGATE_FTP_SERVER }}
+          username: ${{ secrets.KINDLEGATE_FTP_USERNAME }}
+          password: ${{ secrets.KINDLEGATE_FTP_PASSWORD }}
