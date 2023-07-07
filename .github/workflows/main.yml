@@ -12,8 +12,8 @@ jobs:
       - name: Get the latest code
         uses: actions/checkout@v2.3.2
       - uses: actions/setup-node@master
-      - name: Install Dependencies
-        run: composer update --ignore-platform-reqs
+#       - name: Install Dependencies
+#         run: composer update --ignore-platform-reqs
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
