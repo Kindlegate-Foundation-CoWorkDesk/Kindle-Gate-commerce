@@ -24,8 +24,6 @@ class DonationApiController extends ControllerBase
     // Extract donation data from the JSON request.
     $data = json_decode($request->getContent(), TRUE);
 
-    // return $this->storeData($data);
-
     if ($data['payment_gateway'] == "paystack") {
       return ($this->confirmPaystack($data['reference'])) ? $this->storeData($data) : "fail";
     }
