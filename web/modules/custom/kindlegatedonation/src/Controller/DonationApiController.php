@@ -18,15 +18,39 @@ class DonationApiController extends ControllerBase {
    *   The JSON response.
    */
   public function donate(Request $request) {
-    // You can process the donation here using the data in $request.
-    // Implement the payment processing logic with your chosen payment gateway.
-
+    // Extract donation data from the JSON request.
+    $data = json_decode($request->getContent(), TRUE);
+  
+    // Create a new donation node.
+    $node = Node::create([
+      'type' => 'donation', // Use the machine name of your donation content type.
+      'title' => 'Donation', // You can set a default title.
+      'field_donor_name' => $data['donor_name'], // Map data from the request to fields.
+      'field_email' => $data['email'],
+      'field_amount' => $data['amount'],
+      // Add other fields as needed.
+    ]);
+  
+    // Save the donation node.
+    $node->save();
+  
     // Example response.
     $response = [
       'status' => 'success',
-      'message' => 'Donation processed successfully.',
+      'message' => 'Donation processed and recorded successfully.',
     ];
-
+  
     return new JsonResponse($response);
+  }
+  
+
+  public function confirmStripe()
+  {
+    
+  }
+
+  public function confirmPaystack()
+  {
+    
   }
 }
