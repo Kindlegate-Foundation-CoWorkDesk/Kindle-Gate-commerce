@@ -24,26 +24,7 @@ class DonationApiController extends ControllerBase
     // Extract donation data from the JSON request.
     $data = json_decode($request->getContent(), TRUE);
 
-    // Create a new donation node.
-    $node = Node::create([
-      'type' => 'donation', // Use the machine name of your donation content type.
-      'title' => 'Donation', // You can set a default title.
-      'field_donor_name' => $data['donor_name'], // Map data from the request to fields.
-      'field_email' => $data['email'],
-      'field_amount' => $data['amount'],
-      // Add other fields as needed.
-    ]);
-
-    // Save the donation node.
-    $node->save();
-
-    // Example response.
-    $response = [
-      'status' => 'success',
-      'message' => 'Donation processed and recorded successfully.',
-    ];
-
-    return new JsonResponse($response);
+    return $this->storeData($data);
   }
 
 
@@ -120,5 +101,29 @@ class DonationApiController extends ControllerBase
     } else {
       return $response;
     }
+  }
+
+  public function storeData($data)
+  {
+    // Create a new donation node.
+    $node = Node::create([
+      'type' => 'donation', // Use the machine name of your donation content type.
+      'title' => 'Donation', // You can set a default title.
+      'field_donor_name' => $data['donor_name'], // Map data from the request to fields.
+      'field_email' => $data['email'],
+      'field_amount' => $data['amount'],
+      // Add other fields as needed.
+    ]);
+
+    // Save the donation node.
+    $node->save();
+
+    // Example response.
+    $response = [
+      'status' => 'success',
+      'message' => 'Donation processed and recorded successfully.',
+    ];
+
+    return new JsonResponse($response);
   }
 }
