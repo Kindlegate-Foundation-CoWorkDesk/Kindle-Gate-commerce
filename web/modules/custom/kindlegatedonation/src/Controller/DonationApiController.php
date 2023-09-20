@@ -47,8 +47,47 @@ class DonationApiController extends ControllerBase
   }
 
 
-  public function confirmStripe()
+  public function confirmStripe($payment_intent_id)
   {
+
+    $stripe_secret_key = 'sk_test_your_secret_key'; // Replace with your Stripe secret API key
+    $payment_intent_id = 'pi_xxxxxxxxxxxxx'; // Replace with the actual Payment Intent ID
+
+    // Set your API endpoint URL
+    $api_url = "https://api.stripe.com/v1/payment_intents/$payment_intent_id/confirm";
+
+    // Set the request headers
+    $headers = array(
+      "Authorization: Bearer $stripe_secret_key",
+    );
+
+    // Make the API request
+    $ch = curl_init($api_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    // Execute the request
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    // Parse and handle the response
+    if ($response === false) {
+      // Handle cURL error
+      echo 'cURL error: ' . curl_error($ch);
+    } else {
+      $response_data = json_decode($response, true);
+
+      if ($response_data && isset($response_data['status']) && $response_data['status'] === 'succeeded') {
+        // Payment confirmed successfully.
+        echo 'Payment confirmed successfully.';
+
+        // You can perform any additional actions here, such as updating your database or sending a confirmation email to the customer.
+      } else {
+        // Payment confirmation failed. Handle this case accordingly.
+        echo 'Payment confirmation failed.';
+      }
+    }
   }
 
   public function confirmPaystack($reference)
@@ -57,7 +96,7 @@ class DonationApiController extends ControllerBase
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://api.paystack.co/transaction/verify/".$reference,
+      CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . $reference,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
