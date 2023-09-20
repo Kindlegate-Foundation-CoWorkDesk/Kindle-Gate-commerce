@@ -1,165 +1,250 @@
 kindlegate.getData:
-  path: '/api/data'
+  path: "/api/data"
   defaults:
     # _controller: '\Drupal\my_api\Controller\MyApiController::getData'
     _controller: '\Drupal\kindlegate\Controller\ApiController::getData'
     _format: json
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
 
 # Vendors
 
 # Register Vendor
 kindlegate.register_vendor:
-  path: '/api/register/vendor'
+  path: "/api/register/vendor"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorController::registerVendor'
     _format: json
   methods: [POST]
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
 
 # Update Vendor
 kindlegate.update_vendor:
-  path: '/api/update/vendor/{vendor_id}'
+  path: "/api/update/vendor/{vendor_id}"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorController::updateVendor'
     _format: json
   methods: [PATCH]
   requirements:
-    _access: 'TRUE'
-
+    _access: "TRUE"
 
 # Delete Vendor
 kindlegate.delete_vendor:
-  path: '/api/vendor/{vendor_id}/delete'
+  path: "/api/vendor/{vendor_id}/delete"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorController::deleteVendor'
     _format: json
   methods: [DELETE]
   requirements:
-    _access: 'TRUE'
-
+    _access: "TRUE"
 
 # Get All Vendors
 kindlegate.get_vendors:
-  path: '/api/vendors'
+  path: "/api/vendors"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorController::getVendors'
     _format: json
   # methods: [GET]
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
+
+
+#Stores
+# Register Store
+kindlegate.register_store:
+  path: "/api/stores/add"
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\StoreController::createStore'
+    _format: json
+  methods: [POST]
+  requirements:
+    _access: "TRUE"
+
+# Update Store
+kindlegate.update_store:
+  path: "/api/stores/update/{store_id}"
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\StoreController::updateStore'
+    _format: json
+  methods: [PATCH]
+  requirements:
+    _access: "TRUE"
+
+# Delete Store
+kindlegate.delete_store:
+  path: "/api/stores/delete/{store_id}"
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\StoreController::deleteStore'
+    _format: json
+  methods: [DELETE]
+  requirements:
+    _access: "TRUE"
+
+# Get All Stores
+kindlegate.get_store:
+  path: "/api/stores"
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\StoreController::viewAllStores'
+    _format: json
+  # methods: [GET]
+  requirements:
+    _access: "TRUE"
+
 
 
 # Products
 kindlegate.products:
-  path: '/api/products'
+  path: "/api/products"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\ProductController::getProducts'
     _format: json
+  methods: [GET]
   requirements:
-    _access: 'TRUE'
-
+    _access: "TRUE"
 
 kindlegate.add_product:
-  path: '/api/products/add'
+  path: "/api/products/add"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\ProductController::addProduct'
     _format: json
+  methods: [POST]
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
 
+kindlegate.delete_product:
+  path: "/api/products/delete/{product_id}"
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\ProductController::deleteProduct'
+    _format: json
+  methods: [DELETE]
+  requirements:
+    _access: "TRUE"
+
+kindlegate.update_product:
+  path: "/api/products/update/{product_id}"
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\ProductController::updateProduct'
+    _format: json
+  methods: [PATCH]
+  requirements:
+    _access: "TRUE"
 
 kindlegate.products_by_vendor:
-  path: '/api/products/{vendor_id}'
+  path: "/api/vendor/{vendor_id}/products"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorProductController::getProductsByVendor'
     _format: json
   requirements:
-    _access: 'TRUE'
-
+    _access: "TRUE"
 
 # Vendor Products
 
 # Add Vendor's Product
 kindlegate.add_vendor_product:
-  path: '/api/vendor/{vendor_id}/products/add'
+  path: "/api/vendor/{vendor_id}/products/add"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorProductController::addVendorProduct'
     _format: json
   methods: [POST]
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
 
 # Update Vendor's Product
 kindlegate.update_vendor_product:
-  path: '/api/vendor/{vendor_id}/products/{product_id}/update'
+  path: "/api/vendor/{vendor_id}/products/{product_id}/update"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorProductController::updateVendorProduct'
     _format: json
   methods: [PATCH]
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
 
 # Delete Vendor's Product
 kindlegate.delete_vendor_product:
-  path: '/api/vendor/{vendor_id}/products/{product_id}/delete'
+  path: "/api/vendor/{vendor_id}/products/{product_id}/delete"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorProductController::deleteVendorProduct'
     _format: json
   methods: [DELETE]
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
 
 # Retrieve Vendor's Product
 kindlegate.get_vendor_product:
-  path: '/api/vendor/{vendor_id}/products/{product_id}'
+  path: "/api/vendor/{vendor_id}/products/{product_id}"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\VendorProductController::getVendorProduct'
     _format: json
   methods: [GET]
   requirements:
-    _access: 'TRUE'
-
+    _access: "TRUE"
 
 # Orders
 
 kindlegate.get_order:
-  path: '/api/order/{order_id}'
+  path: "/api/order/{order_id}"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\OrderController::getOrder'
     _format: json
   methods: [GET]
   requirements:
-    _access: 'TRUE'
+    _access: "TRUE"
 
 # Create Order
 kindlegate.create_order:
-  path: '/api/order/create'
+  path: "/api/order/create"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\OrderController::createOrder'
     _format: json
   methods: [POST]
   requirements:
-    _access: 'TRUE'
-
+    _access: "TRUE"
 
 kindlegate.update_order:
-  path: '/api/order/{order_id}/update'
+  path: "/api/order/{order_id}/update"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\OrderController::updateOrder'
     _format: json
   methods: [PATCH]
   requirements:
-    _access: 'TRUE'
-
+    _access: "TRUE"
 
 kindlegate.delete_order:
-  path: '/api/order/{order_id}/delete'
+  path: "/api/order/{order_id}/delete"
   defaults:
     _controller: '\Drupal\kindlegate\Controller\OrderController::deleteOrder'
     _format: json
   methods: [DELETE]
+  requirements:
+    _access: "TRUE"
+
+
+
+kindlegate.addToCart:
+  path: '/api/cart/add'
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\CartController::addToCart'
+    _format: 'json'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'
+
+kindlegate.updateCartItem:
+  path: '/api/cart/update/{cart_item_id}'
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\CartController::updateCartItem'
+    _format: 'json'
+  methods: [PATCH]
+  requirements:
+    _access: 'TRUE'
+    cart_item_id: '\d+'
+
+kindlegate.viewCart:
+  path: '/api/cart/view'
+  defaults:
+    _controller: '\Drupal\kindlegate\Controller\CartController::viewCart'
+    _format: 'json'
+  methods: [GET]
   requirements:
     _access: 'TRUE'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\kindlegate\Controller;
+namespace Drupal\kindlegatecalculator\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Provides an API endpoint.
  */
-class ApiController extends ControllerBase {
+class TaxCalculatorController extends ControllerBase {
 
   /**
    * Returns JSON response.
@@ -17,6 +17,15 @@ class ApiController extends ControllerBase {
     $data = [
       'message' => 'Hello, API!',
     ];
+    return new JsonResponse($data);
+  }
+
+  public function calculate()
+  {
+    $data = [
+      'message' => '',
+    ];
+
     return new JsonResponse($data);
   }
 }

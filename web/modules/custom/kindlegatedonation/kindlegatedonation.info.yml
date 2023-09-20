@@ -1,0 +1,8 @@
+name: 'KindleGate Donation'
+type: module
+description: 'A donation system for non-profit organizations.'
+core_version_requirement: ^8 || ^9
+package: Custom
+dependencies:
+  - drupal:serialization
+  - drupal:rest

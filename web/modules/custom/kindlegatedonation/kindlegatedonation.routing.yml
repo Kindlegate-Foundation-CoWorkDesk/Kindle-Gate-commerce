@@ -1,0 +1,8 @@
+kindlegatedonation.donation_api:
+  path: '/api/v1/donate'
+  defaults:
+    _controller: '\Drupal\kindlegatedonation\Controller\DonationApiController::donate'
+    _title: 'Donate'
+  requirements:
+    _permission: 'access donation api'
+    _format: 'json'

@@ -1,0 +1,8 @@
+kindlegate.getData:
+  path: '/api/calculate'
+  defaults:
+    # _controller: '\Drupal\my_api\Controller\MyApiController::getData'
+    _controller: '\Drupal\kindlegatecalculator\Controller\TaxCalculatorController::getData'
+    _format: json
+  requirements:
+    _access: 'TRUE'
