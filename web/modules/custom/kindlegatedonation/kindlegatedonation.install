@@ -1,0 +1,39 @@
+/**
+ * Implements hook_install().
+ */
+function kindlegatedonation_install() {
+  // Define the donation content type.
+  $content_type = [
+    'type' => 'donation',
+    'name' => 'Donation',
+    'description' => 'Donation records',
+    'title_label' => 'Donation Date',
+    'base_table' => 'node',
+    'base_field' => 'nid',
+    'custom' => TRUE,
+  ];
+
+  // Create the content type.
+  node_type_save((object) $content_type);
+
+  // Add fields to the donation content type.
+  // Add fields programmatically using field_create_field() and field_create_instance().
+
+  // Example: Add a 'Donor Name' field.
+  $field_name = 'field_donor_name';
+  $field = field_create_field([
+    'field_name' => $field_name,
+    'type' => 'text',
+  ]);
+
+  $instance = field_create_instance([
+    'field_name' => $field_name,
+    'entity_type' => 'node',
+    'bundle' => 'donation', // Use the machine name of your donation content type.
+  ]);
+
+  // Repeat the above steps for other fields (e.g., email, amount, date).
+
+  // Clear the cache to reflect changes.
+  drupal_flush_all_caches();
+}

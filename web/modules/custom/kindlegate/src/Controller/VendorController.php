@@ -106,6 +106,7 @@ class VendorController extends ControllerBase
       ->condition('status', 1)
       ->condition('roles', 'vendor');
 
+      $query->accessCheck(FALSE);
     $vendor_ids = $query->execute();
     $vendors = User::loadMultiple($vendor_ids);
 
@@ -115,6 +116,8 @@ class VendorController extends ControllerBase
       $response[] = [
         'vendor_id' => $vendor->id(),
         'name' => $vendor->getDisplayName(),
+        'email' => $vendor->getEmail(),
+        // $vendor
         // Include other relevant vendor data in the response.
       ];
     }

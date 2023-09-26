@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+function kindlegatedonation_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.kindlegatedonation':
+      return '<p>' . t('A donation system for non-profit organizations.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function kindlegatedonation_permission() {
+  return array(
+    'access donation api' => array(
+      'title' => t('Access the donation API'),
+      'description' => t('Allows users to access the donation API for making donations.'),
+    ),
+  );
+}
